@@ -6,7 +6,7 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 11:01:16 by plamusse          #+#    #+#             */
-/*   Updated: 2018/01/11 18:45:29 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/01/18 18:57:41 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		position(int button, int x, int y, t_mlx *env)
 	{
 		env->num->x1 = ((double)x / env->num->zoom) + env->num->x1 - (env->win_w / (2 * env->num->zoom));
 		env->num->y1 = ((double)y / env->num->zoom) + env->num->y1 - (env->win_h / (2 * env->num->zoom));
-		build_fractal(env, env->num, &mandelbrot);
+		build_fractal(env, env->num);
 		printf("%d, %d\n", x, y);
 		printf("%f, %f\n", env->num->x1, env->num->y1);
 	}
@@ -58,6 +58,6 @@ int		control(int keycode, t_mlx *env)
 		env->num->i_max += 5;
 	if (keycode == KEY_ITER_LESS)
 		env->num->i_max -= 5;
-	build_fractal(env, env->num, &mandelbrot);
+	build_fractal(env, env->num);
 	return (keycode);
 }

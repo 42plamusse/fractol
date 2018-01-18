@@ -6,7 +6,7 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 16:25:35 by plamusse          #+#    #+#             */
-/*   Updated: 2018/01/11 17:23:44 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/01/18 19:00:41 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	init_num(t_numbers *num)
 	num->y = 0;
 }
 
-int		mandelbrot(t_numbers *num)
+int		series(t_numbers *num)
 {
 	int		i;
 
@@ -55,7 +55,7 @@ int		mandelbrot(t_numbers *num)
 	return (i);
 }
 
-void	build_fractal(t_mlx *env, t_numbers *num, int (*fractal)(t_numbers*))
+void	mandelbrot(t_mlx *env, t_numbers *num)
 {
 	double		x;
 	double		y;
@@ -71,7 +71,7 @@ void	build_fractal(t_mlx *env, t_numbers *num, int (*fractal)(t_numbers*))
 			num->zi = 0;
 			num->ci = y / num->zoom + num->y1;
 			num->cr = x / num->zoom + num->x1;
-			i = fractal(num);
+			i = series(num);
 			if (i != num->i_max)
 				plot_pixel((int)x, (int)y, env, rgb(0, i * 255 / num->i_max , 0));
 			else
@@ -83,19 +83,16 @@ void	build_fractal(t_mlx *env, t_numbers *num, int (*fractal)(t_numbers*))
 	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 }
 
-int		position(int button, int x, int y, t_mlx *env)
+void	build_fractal(t_mlx *env, t_numbers *num)
 {
-	if (button == 1 && x > 0 && y > 0)
+	if (strcmp(env->name, "mandelbrot") == 0)
+		mandelbrot(env, num);
+	else
 	{
-		env->num->x1 = ((double)x / env->num->zoom) + env->num->x1 - (env->win_w / (2 * env->num->zoom));
-		env->num->y1 = ((double)y / env->num->zoom) + env->num->y1 - (env->win_h / (2 * env->num->zoom));
-		build_fractal(env, env->num, &mandelbrot);
-		printf("%d, %d\n", x, y);
-		printf("%f, %f\n", env->num->x1, env->num->y1);
+		printf("usage: ./fractol [fractale] (mandelbrot, julia, ...)\n");
+		exit(1);
 	}
-	return (0);
 }
-
 int		main(int argc, char **argv)
 {
 	t_mlx	env;
@@ -104,7 +101,7 @@ int		main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		printf("usage: %s [fractale]\n", argv[1]);
+		printf("usage: %s [fractale] (mandelbrot, julia, ...)\n", argv[1]);
 		return (-1);
 	}
 	env.win_w = 810;
@@ -113,9 +110,10 @@ int		main(int argc, char **argv)
 	env.img = mlx_new_image(env.mlx, env.win_w, env.win_h);
 	env.data = (int*)mlx_get_data_addr(env.img, &ctx.bpp, &ctx.sl, &ctx.endian);
 	env.num = &num;
+	env.name = argv[1];
 	init_num(&num);
 	env.win = mlx_new_window(env.mlx, env.win_w, env.win_h, "Fractale");
-	build_fractal(&env, &num, &mandelbrot);
+	build_fractal(&env, &num);
 	mlx_put_image_to_window(env.mlx, env.win, env.img, 0, 0);
 	mlx_mouse_hook(env.win, &position, &env);
 	mlx_hook(env.win, 2, 0, &control, &env);

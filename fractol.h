@@ -6,7 +6,7 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 16:31:58 by plamusse          #+#    #+#             */
-/*   Updated: 2018/01/11 18:45:55 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/01/18 18:56:40 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,15 @@ typedef struct	s_mlx
 	int		*data;
 	int		win_w;
 	int		win_h;
+	char	*name;
 	t_numbers	*num;
 }				t_mlx;
 
-void	zoom_in(t_mlx *env);
 int		zoom(int keycode, t_mlx *env);
 int		control(int keycode, t_mlx *env);
-void	build_fractal(t_mlx *env, t_numbers *num, int (*fractal)(t_numbers*));
-int		mandelbrot(t_numbers *num);
+void	build_fractal(t_mlx *env, t_numbers *num);
+void	mandelbrot(t_mlx *env, t_numbers *num);
+int		series(t_numbers *num);
 int		position(int button, int x, int y, t_mlx *env);
 
 #endif
