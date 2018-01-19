@@ -6,7 +6,7 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 16:31:58 by plamusse          #+#    #+#             */
-/*   Updated: 2018/01/18 18:56:40 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/01/19 17:15:52 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int		zoom(int keycode, t_mlx *env);
 int		control(int keycode, t_mlx *env);
 void	build_fractal(t_mlx *env, t_numbers *num);
 void	mandelbrot(t_mlx *env, t_numbers *num);
-int		series(t_numbers *num);
 int		position(int button, int x, int y, t_mlx *env);
+int		rgb(int r, int g, int b);
+void	plot_pixel(int x, int y, t_mlx *env, int color);
 
 #endif
