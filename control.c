@@ -6,7 +6,7 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 11:01:16 by plamusse          #+#    #+#             */
-/*   Updated: 2018/01/18 18:57:41 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/01/25 17:13:39 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,24 @@ static void	zoom_out(t_mlx *env)
 
 int		position(int button, int x, int y, t_mlx *env)
 {
-	if (button == 1 && x > 0 && y > 0)
+	if (strcmp(env->name, JULIA) && button == 1 && x > 0 && y > 0)
 	{
 		env->num->x1 = ((double)x / env->num->zoom) + env->num->x1 - (env->win_w / (2 * env->num->zoom));
 		env->num->y1 = ((double)y / env->num->zoom) + env->num->y1 - (env->win_h / (2 * env->num->zoom));
-		build_fractal(env, env->num);
-		printf("%d, %d\n", x, y);
-		printf("%f, %f\n", env->num->x1, env->num->y1);
+		build_fractal(env);
+		mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
+	}
+	return (0);
+}
+
+int		motion(int x, int y, t_mlx *env)
+{
+	if (strcmp(env->name, JULIA) == 0)
+	{
+		env->num->ci = y / env->num->zoom + env->num->y1;
+		env->num->cr = x / env->num->zoom + env->num->x1;
+		build_fractal(env);
+		mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 	}
 	return (0);
 }
@@ -53,11 +64,15 @@ int		control(int keycode, t_mlx *env)
 	if (keycode == KEY_DOWN)
 		env->num->y1 += env->win_h / env->num->zoom / 12;
 	if (keycode == KEY_UP)
+	{
+		printf("%d, %d\n", env->win_h, env->num->zoom);
 		env->num->y1 -= env->win_h / env->num->zoom / 12;
+	}
 	if (keycode == KEY_ITER_MORE)
 		env->num->i_max += 5;
 	if (keycode == KEY_ITER_LESS)
 		env->num->i_max -= 5;
-	build_fractal(env, env->num);
+	build_fractal(env);
+	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
 	return (keycode);
 }

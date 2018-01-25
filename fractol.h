@@ -6,7 +6,7 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 16:31:58 by plamusse          #+#    #+#             */
-/*   Updated: 2018/01/19 18:46:13 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/01/25 17:03:10 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 # include <stdlib.h>
 # include <mlx.h>
 # include <unistd.h>
+# include <string.h>
 
+# define USAGE "usage: ./fractol [fractale] (mandelbrot, julia, ...)\n"
 # define KEY_LEFT 123
 # define KEY_RIGHT 124
 # define KEY_DOWN 125
@@ -27,6 +29,8 @@
 # define KEY_ZOOM_OUT 78
 # define KEY_ITER_MORE 116
 # define KEY_ITER_LESS 121
+# define MANDELBROT "mandelbrot"
+# define JULIA "julia"
 
 typedef struct	s_img
 {
@@ -64,17 +68,19 @@ typedef struct	s_mlx
 	int		win_w;
 	int		win_h;
 	char	*name;
-	void	*fractal;
 	t_numbers	*num;
 }				t_mlx;
 
 int		zoom(int keycode, t_mlx *env);
 int		control(int keycode, t_mlx *env);
-void	build_fractal(t_mlx *env, t_numbers *num);
+void	build_fractal(t_mlx *env);
 void	mandelbrot(t_mlx *env, t_numbers *num);
 void	julia(t_mlx *env, t_numbers *num);
 int		position(int button, int x, int y, t_mlx *env);
+int		motion(int x, int y, t_mlx *env);
 int		rgb(int r, int g, int b);
 void	plot_pixel(int x, int y, t_mlx *env, int color);
+void	init_env(t_mlx *env, t_numbers *num, char *name);
+void	init_fractal(t_mlx *env);
 
 #endif
