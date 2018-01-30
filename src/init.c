@@ -6,7 +6,7 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 12:03:44 by plamusse          #+#    #+#             */
-/*   Updated: 2018/01/29 12:18:17 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/01/30 14:32:13 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,29 @@
 
 static void		init_mandel(t_mlx *env)
 {
-	env->num->x1 = -2.1;
-	env->num->y1 = -1.2;
-	env->num->zoom = 300;
+	env->mandel = 1;
+	env->num->x1 = -2;
+	env->num->y1 = -2;
+	env->num->zoom = 200;
 	env->num->i_max = 50;
-	env->win_w = 810;
-	env->win_h = 720;
+	env->win_w = 800;
+	env->win_h = 800;
+}
+
+static void		init_burning(t_mlx *env)
+{
+	env->burning= 1;
+	env->num->x1 = -2;
+	env->num->y1 = -2;
+	env->num->zoom = 200;
+	env->num->i_max = 50;
+	env->win_w = 800;
+	env->win_h = 800;
 }
 
 static void 	init_julia(t_mlx *env)
 {
+	env->julia = 1;
 	env->num->x1 = -2;
 	env->num->y1 = -2;
 	env->num->zoom = 200;
@@ -35,27 +48,43 @@ static void 	init_julia(t_mlx *env)
 	env->win_h = 800;
 }
 
-void			init_fractal(t_mlx *env)
+void			ft_perror(char *str)
 {
-	if (strcmp(env->name, MANDELBROT) == 0)
-		init_mandel(env);
-	else if (strcmp(env->name, JULIA) == 0)
-		init_julia(env);
-	else
-	{
-		printf(USAGE);
-		exit(1);
-	}
+	ft_printf("%s\n", str);
+	exit(1);
 }
 
-void			init_env(t_mlx *env, t_numbers *num, char *name)
+void			flags(t_mlx *env, int argc, char **argv)
+{
+	char	*tmp;
+
+	env->mandel = 0;
+	env->burning = 0;
+	env->julia = 0;
+	tmp = argv[1];
+	if (argc == 3)
+	{
+		if (ft_strcmp(tmp, JULIA) == 0)
+			env->julia = 1;
+		else
+			ft_perror(USAGE);
+		tmp = argv[2];
+	}
+	if (ft_strcmp(tmp, MANDELBROT) == 0)
+		init_mandel(env);
+	else if (ft_strcmp(tmp, BURNINGSHIP) == 0)
+		init_burning(env);
+	else
+		ft_perror(USAGE);
+	if (env->julia && (env->mandel || env->burning))
+		init_julia(env);
+}
+
+void			init_env(t_mlx *env)
 {
 	t_img	ctx;
 
 	env->mlx = mlx_init();
-	env->num = num;
-	env->name = name;
-	init_fractal(env);
 	env->img = mlx_new_image(env->mlx, env->win_w, env->win_h);
 	env->data = (int*)mlx_get_data_addr(env->img, &ctx.bpp, &ctx.sl, &ctx.endian);
 	build_fractal(env);
