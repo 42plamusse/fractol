@@ -6,7 +6,7 @@
 #    By: plamusse <plamusse@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/17 14:39:22 by plamusse          #+#    #+#              #
-#    Updated: 2018/01/29 15:57:39 by plamusse         ###   ########.fr        #
+#    Updated: 2018/01/31 17:04:38 by plamusse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRC = ft_abs.c \
 		ft_memdel.c \
 		ft_memmove.c \
 		ft_memset.c \
+		ft_perror.c \
 		ft_putchar.c \
 		ft_putchar_fd.c \
 		ft_putendl.c \

@@ -6,7 +6,7 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 16:25:35 by plamusse          #+#    #+#             */
-/*   Updated: 2018/01/30 14:17:57 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/01/31 17:11:18 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		main(int argc, char **argv)
 {
-	t_mlx	env;
+	t_mlx		env;
 	t_numbers	num;
 
 	if (argc != 2 && argc != 3)

@@ -6,7 +6,7 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 08:35:25 by plamusse          #+#    #+#             */
-/*   Updated: 2018/01/29 15:55:46 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/01/31 17:05:09 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ double				ft_fabs(double n);
 ssize_t				ft_intlen(ssize_t n);
 
 char				*ft_strrev(const char *s);
+
+void				ft_perror(char *str);
 
 int					ft_printf(const char *format, ...);
 

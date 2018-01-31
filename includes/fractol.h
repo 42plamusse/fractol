@@ -6,7 +6,7 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 16:31:58 by plamusse          #+#    #+#             */
-/*   Updated: 2018/01/31 15:05:19 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/01/31 17:15:44 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <mlx.h>
 # include <unistd.h>
 # include <math.h>
+# include <pthread.h>
 # include "/Users/plamusse/fractol/libft/includes/libft.h"
 
 # define USAGE "usage: ./fractol [--julia] fractal (mandelbrot | burningship)"
@@ -44,44 +45,44 @@ typedef struct	s_img
 
 typedef struct	s_numbers
 {
-	double		x1;
-	double		y1;
-	double		zoom;
-	double		zi;
-	double		ci;
-	double		zr;
-	double		cr;
-	double		i_max;
-	double		tmp;
+	double	x1;
+	double	y1;
+	double	zoom;
+	double	zi;
+	double	ci;
+	double	zr;
+	double	cr;
+	double	i_max;
+	double	tmp;
 }				t_numbers;
 
 typedef struct	s_mlx
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	int		*data;
-	int		win_w;
-	int		win_h;
-	char	*name;
-	int		julia;
-	int		mandel;
-	int		burning;
+	void		*mlx;
+	void		*win;
+	void		*img;
+	int			*data;
+	int			win_w;
+	int			win_h;
+	char		*name;
+	int			julia;
+	int			mandel;
+	int			burning;
 	t_numbers	*num;
 }				t_mlx;
 
-int		zoom(int keycode, t_mlx *env);
-int		control(int keycode, t_mlx *env);
-void	build_fractal(t_mlx *env);
-void	mandelbrot(t_mlx *env, t_numbers *num);
-void	julia(t_mlx *env, t_numbers *num);
-int		position(int button, int x, int y, t_mlx *env);
-int		motion(int x, int y, t_mlx *env);
-int		rgb(int r, int g, int b);
-void	plot_pixel(int x, int y, t_mlx *env, int color);
-void	init_env(t_mlx *env);
-void	flags(t_mlx *env, int argc, char **argv);
-void	ft_perror(char *str);
-int		get_color(double i, double i_max);
+int				zoom(int keycode, t_mlx *env);
+int				control(int keycode, t_mlx *env);
+void			build_fractal(t_mlx *env);
+void			mandelbrot(t_mlx *env, t_numbers *num);
+void			julia(t_mlx *env, t_numbers *num);
+int				position(int button, int x, int y, t_mlx *env);
+int				motion(int x, int y, t_mlx *env);
+int				rgb(int r, int g, int b);
+void			plot_pixel(int x, int y, t_mlx *env, int color);
+void			init_env(t_mlx *env);
+void			flags(t_mlx *env, int argc, char **argv);
+void			ft_perror(char *str);
+int				get_color(double i, double i_max);
 
 #endif

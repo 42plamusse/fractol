@@ -6,7 +6,7 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 11:01:16 by plamusse          #+#    #+#             */
-/*   Updated: 2018/01/31 12:52:52 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/01/31 17:13:39 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,30 @@
 
 static void	zoom_in(t_mlx *env)
 {
-	env->num->x1 = env->num->x1 + (env->win_w / (2 * env->num->zoom)) * (1 - 1 / 1.2);
-	env->num->y1 = env->num->y1 + (env->win_h / (2 * env->num->zoom)) * (1 - 1 / 1.2);
+	env->num->x1 = env->num->x1
+		+ (env->win_w / (2 * env->num->zoom)) * (1 - 1 / 1.2);
+	env->num->y1 = env->num->y1
+		+ (env->win_h / (2 * env->num->zoom)) * (1 - 1 / 1.2);
 	env->num->zoom *= 1.2;
-//	env->num->i_max += 2;
 }
 
 static void	zoom_out(t_mlx *env)
 {
-	env->num->x1 = env->num->x1 + (env->win_w / (2 * env->num->zoom)) * (1 - 1 / 0.8);
-	env->num->y1 = env->num->y1 + (env->win_h / (2 * env->num->zoom)) * (1 - 1 / 0.8);
+	env->num->x1 = env->num->x1
+		+ (env->win_w / (2 * env->num->zoom)) * (1 - 1 / 0.8);
+	env->num->y1 = env->num->y1
+		+ (env->win_h / (2 * env->num->zoom)) * (1 - 1 / 0.8);
 	env->num->zoom *= 0.8;
-//	env->num->i_max -= 2;
 }
 
-int		position(int button, int x, int y, t_mlx *env)
+int			position(int button, int x, int y, t_mlx *env)
 {
 	if (button == 1 && x > 0 && y > 0)
 	{
-		env->num->x1 = ((double)x / env->num->zoom) + env->num->x1 - (env->win_w / (2 * env->num->zoom));
-		env->num->y1 = ((double)y / env->num->zoom) + env->num->y1 - (env->win_h / (2 * env->num->zoom));
+		env->num->x1 = ((double)x / env->num->zoom) + env->num->x1
+			- (env->win_w / (2 * env->num->zoom));
+		env->num->y1 = ((double)y / env->num->zoom) + env->num->y1
+			- (env->win_h / (2 * env->num->zoom));
 	}
 	if (button == 5)
 		zoom_in(env);
@@ -44,7 +48,7 @@ int		position(int button, int x, int y, t_mlx *env)
 	return (0);
 }
 
-int		motion(int x, int y, t_mlx *env)
+int			motion(int x, int y, t_mlx *env)
 {
 	if (env->julia)
 	{
@@ -56,7 +60,7 @@ int		motion(int x, int y, t_mlx *env)
 	return (0);
 }
 
-int		control(int keycode, t_mlx *env)
+int			control(int keycode, t_mlx *env)
 {
 	ft_bzero((void*)env->data, (env->win_w * env->win_h * 4));
 	if (keycode == KEY_ZOOM_IN)

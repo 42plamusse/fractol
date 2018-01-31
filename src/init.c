@@ -6,12 +6,11 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 12:03:44 by plamusse          #+#    #+#             */
-/*   Updated: 2018/01/31 15:17:30 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/01/31 17:07:15 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
 
 static void		init_mandel(t_mlx *env)
 {
@@ -26,7 +25,7 @@ static void		init_mandel(t_mlx *env)
 
 static void		init_burning(t_mlx *env)
 {
-	env->burning= 1;
+	env->burning = 1;
 	env->num->x1 = -2;
 	env->num->y1 = -2;
 	env->num->zoom = 200;
@@ -35,7 +34,7 @@ static void		init_burning(t_mlx *env)
 	env->win_h = 800;
 }
 
-static void 	init_julia(t_mlx *env)
+static void		init_julia(t_mlx *env)
 {
 	env->julia = 1;
 	env->num->x1 = -2;
@@ -46,12 +45,6 @@ static void 	init_julia(t_mlx *env)
 	env->num->ci = 0.01;
 	env->win_w = 800;
 	env->win_h = 800;
-}
-
-void			ft_perror(char *str)
-{
-	ft_printf("%s\n", str);
-	exit(1);
 }
 
 void			flags(t_mlx *env, int argc, char **argv)
@@ -86,7 +79,8 @@ void			init_env(t_mlx *env)
 
 	env->mlx = mlx_init();
 	env->img = mlx_new_image(env->mlx, env->win_w, env->win_h);
-	env->data = (int*)mlx_get_data_addr(env->img, &ctx.bpp, &ctx.sl, &ctx.endian);
+	env->data = (int*)mlx_get_data_addr(env->img
+			, &ctx.bpp, &ctx.sl, &ctx.endian);
 	build_fractal(env);
 	env->win = mlx_new_window(env->mlx, env->win_w, env->win_h, "Fractale");
 	mlx_put_image_to_window(env->mlx, env->win, env->img, 0, 0);
