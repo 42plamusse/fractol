@@ -6,7 +6,7 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 16:31:58 by plamusse          #+#    #+#             */
-/*   Updated: 2018/01/30 14:55:06 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/01/31 15:05:19 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <mlx.h>
 # include <unistd.h>
+# include <math.h>
 # include "/Users/plamusse/fractol/libft/includes/libft.h"
 
 # define USAGE "usage: ./fractol [--julia] fractal (mandelbrot | burningship)"
@@ -44,20 +45,13 @@ typedef struct	s_img
 typedef struct	s_numbers
 {
 	double		x1;
-	double		x2;
 	double		y1;
-	double		y2;
 	double		zoom;
-	int			image_x;
-	int			image_y;
 	double		zi;
 	double		ci;
 	double		zr;
 	double		cr;
-	int			i;
-	int			i_max;
-	double		x;
-	double		y;
+	double		i_max;
 	double		tmp;
 }				t_numbers;
 
@@ -88,5 +82,6 @@ void	plot_pixel(int x, int y, t_mlx *env, int color);
 void	init_env(t_mlx *env);
 void	flags(t_mlx *env, int argc, char **argv);
 void	ft_perror(char *str);
+int		get_color(double i, double i_max);
 
 #endif

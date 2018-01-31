@@ -6,7 +6,7 @@
 /*   By: plamusse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/09 11:01:16 by plamusse          #+#    #+#             */
-/*   Updated: 2018/01/30 15:16:29 by plamusse         ###   ########.fr       */
+/*   Updated: 2018/01/31 12:52:52 by plamusse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	zoom_in(t_mlx *env)
 	env->num->x1 = env->num->x1 + (env->win_w / (2 * env->num->zoom)) * (1 - 1 / 1.2);
 	env->num->y1 = env->num->y1 + (env->win_h / (2 * env->num->zoom)) * (1 - 1 / 1.2);
 	env->num->zoom *= 1.2;
-	env->num->i_max += 2;
+//	env->num->i_max += 2;
 }
 
 static void	zoom_out(t_mlx *env)
@@ -25,7 +25,7 @@ static void	zoom_out(t_mlx *env)
 	env->num->x1 = env->num->x1 + (env->win_w / (2 * env->num->zoom)) * (1 - 1 / 0.8);
 	env->num->y1 = env->num->y1 + (env->win_h / (2 * env->num->zoom)) * (1 - 1 / 0.8);
 	env->num->zoom *= 0.8;
-	env->num->i_max -= 2;
+//	env->num->i_max -= 2;
 }
 
 int		position(int button, int x, int y, t_mlx *env)
